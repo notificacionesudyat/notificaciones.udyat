@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Seguridad - Udyat Seguridad</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGEK1FHQTN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QGEK1FHQTN');
+    </script>
+
+    <style>
+        /* Estilos generales para la página */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            border: 2px solid #004080;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h2 {
+            color: #004080;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Ajustes para los campos de entrada y botón */
+        input[type="text"], input[type="email"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #d1d1d1;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 90%;
+            padding: 10px;
+            background-color: #004080;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #003366;
+        }
+
+        /* Estilos para la advertencia */
+        .warning {
+            display: none;
+            max-width: 400px;
+            padding: 20px;
+            border: 2px solid #ff0000;
+            background-color: #fff3f3;
+            color: #ff0000;
+            box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.3);
+            text-align: center;
+            font-weight: bold;
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+            border-radius: 8px;
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor principal del formulario -->
+    <div class="container" id="form-section">
+        <h2>Verificación de Seguridad</h2>
+        <p>Por favor, complete este formulario para verificar su identidad y acceder a la plataforma de seguridad.</p>
+        <form id="securityForm">
+            <input type="text" id="userName" name="userName" placeholder="Nombre de Usuario" required>
+            <input type="email" id="userEmail" name="userEmail" placeholder="Correo Electrónico" required>
+            <button type="submit">Verificar Identidad</button>
+        </form>
+    </div>
+
+    <!-- Sección de Advertencia -->
+    <div class="warning" id="warning-section">
+        <h2>¡Advertencia de Seguridad!</h2>
+        <p>USTED HA PUESTO EN RIESGO LA SEGURIDAD DE LA INFORMACIÓN DE UDYAT SEGURIDAD</p>
+        <p>Este es un simulacro de phishing diseñado para evaluar la conciencia de seguridad de nuestros empleados.</p>
+        <p>Por favor, tome medidas para fortalecer su conocimiento en ciberseguridad.</p>
+    </div>
+
+    <script>
+        document.getElementById("securityForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // Ocultar el formulario y mostrar la advertencia
+            document.getElementById("form-section").style.display = "none";
+            document.getElementById("warning-section").style.display = "block";
+            
+            // Captura los datos ingresados
+            const userName = document.getElementById("userName").value;
+            const userEmail = document.getElementById("userEmail").value;
+            
+            // Enviar datos a Google Forms
+            fetch("https://docs.google.com/forms/u/0/d/e/1FAIpQLSeUCaNdh-IcZWdf1dmEFRYZ2GsiIpOsLKjMa6xUU2wcXbuZ7g/formResponse", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `entry.316829114=${encodeURIComponent(userName)}&entry.1603549417=${encodeURIComponent(userEmail)}`
+            }).then(response => {
+                console.log("Datos enviados correctamente.");
+            }).catch(error => {
+                console.error("Error al enviar datos:", error);
+            });
+        });
+    </script>
+</body>
+</html>
